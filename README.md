@@ -1,14 +1,129 @@
+# Praktikum 1 - User Management API
+
+Praktikum ini adalah implementasi API sederhana menggunakan Spring Boot dan Java untuk mengelola data pengguna (Create, Read, Update, Delete). 
+
+## Dokumentasi Web
+
 1. Hasil ditampilan Web
    <img width="1920" height="1200" alt="Screenshot 2026-03-03 151559" src="https://github.com/user-attachments/assets/3ba0602d-7f5a-418d-ae09-445926c8957f" />
+   
+## Dokumentasi API
 
-3. Hasil Tes Postman Get
-   <img width="1920" height="1200" alt="Screenshot 2026-03-03 151520" src="https://github.com/user-attachments/assets/06eed55c-ebf8-40fb-babf-264b28af7676" />
+Base URL: http://localhost:8080  
+   
+1. Tambah User/Data(Create)
+Menambahkan data user baru. ID akan *digenerate* secara otomatis dalam bentuk UUID.
 
-5. Hasil Tes Postman Post
-   <img width="1920" height="1200" alt="Screenshot 2026-03-03 151931" src="https://github.com/user-attachments/assets/028c0991-65d4-4af7-b99c-f9f4b432b20e" />
+* URL: /api/users
+* Method: POST
+* Request Body:
+    
 
-7. Hasil Tes Postman Put
-   <img width="1920" height="1200" alt="Screenshot 2026-03-03 152203" src="https://github.com/user-attachments/assets/51dc570d-c7bc-4c94-b00f-0a1baa8f66a8" />
+```json
+    {
+        "name": "Faris Naufal",
+        "age": 21
+    }
+```
+* Success Response (201 Created):
 
-9. Hasil Tes Postman Delete
-    <img width="1920" height="1200" alt="Screenshot 2026-03-03 152218" src="https://github.com/user-attachments/assets/cb2008fd-4a8d-43ee-a19e-c974466c2c32" />
+
+```json
+    {
+        "status": "success",
+        "data": {
+            "id": "e76af37e-8c0c-4ead-a191-94d57118d171",
+            "name": "Faris Naufal",
+            "age": 21
+        }
+    }
+```
+
+2. Ambil Semua Data User (Read All)
+Menampilkan daftar seluruh user yang ada di dalam *database*.
+
+* URL: /api/users
+* Method: GET
+* Success Response (200 OK):
+    
+
+```json
+    {
+        "status": "success",
+        "data": [
+            {
+                "id": "db970f67-4689-422d-acc4-c4d8dca62eae",
+                "name": "Sandi Ardhian",
+                "age": 21
+            },
+            {
+               "id": "e76af37e-8c0c-4ead-a191-94d57118d171",
+                "name": "Faris Naufal",
+                "age": 69
+            }
+        ]
+    }
+``` 
+
+3. Ambil Detail User Spesifik (Read Detail)
+Mencari dan menampilkan detail satu user berdasarkan ID.
+
+* URL: /api/users/{db970f67-4689-422d-acc4-c4d8dca62eae}
+* Method: GET
+* URL Params: id=[String]
+* Success Response (200 OK):
+    
+```json
+    {
+        "status": "success",
+        "data": {
+            "id": "db970f67-4689-422d-acc4-c4d8dca62eae",
+            "name": "Sandi Ardhian",
+            "age": 69
+        }
+    }
+```   
+
+4. Ubah Data User (Update)
+Memperbarui data nama dan/atau umur dari user yang sudah ada.
+
+* URL: /api/users/{db970f67-4689-422d-acc4-c4d8dca62eae}
+* Method: PUT
+* URL Params: id=[String]
+* Request Body:
+    
+```json
+    {
+        "name": "Sando Mendo",
+        "age": 69
+    }
+``` 
+* Success Response (200 OK):
+
+
+
+```json
+    {
+        "status": "success",
+        "data": {
+            "id": "db970f67-4689-422d-acc4-c4d8dca62eae",
+            "name": "Sando Mendo",
+            "age": 69
+        }
+    }
+```   
+
+5. Hapus Data User (Delete)
+Menghapus data user secara permanen dari *database*.
+
+* URL: /api/users/{db970f67-4689-422d-acc4-c4d8dca62eae}
+* Method: DELETE
+* URL Params: id=[String]
+* Success Response (200 OK):
+    
+
+```json
+    {
+        "status": "success delete user with id db970f67-4689-422d-acc4-c4d8dca62eae"
+    }
+```
